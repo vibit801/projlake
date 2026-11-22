@@ -24,8 +24,7 @@ HEADERS = {
 }
 
 # Matches lines like: TURB:120,TDS:340,PH:7.12
-LINE_PATTERN = re.compile(r"TURB:(-?\d+),TDS:(-?\d+),PH:(-?\d+(?:\.\d+)?)")
-
+LINE_PATTERN = re.compile( r"TURB\s*:\s*(-?\d+)\s*,\s*TDS\s*:\s*(-?\d+)\s*,\s*PH\s*:\s*(-?\d+(?:\.\d+)?)")
 
 def connect_serial(port: str, baud: int) -> serial.Serial:
     while True:
