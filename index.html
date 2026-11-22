@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Quality Telemetry</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Water Quality Monitor</h1>
+      <span id="status" class="status">Connecting...</span>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <span class="label">pH Level</span>
+        <strong id="ph-value" class="value">--</strong>
+      </div>
+      <div class="card">
+        <span class="label">TDS</span>
+        <strong id="tds-value" class="value">--</strong>
+      </div>
+      <div class="card">
+        <span class="label">Turbidity</span>
+        <strong id="turb-value" class="value">--</strong>
+      </div>
+    </section>
+
+    <p class="meta">Last updated: <span id="last-updated">--</span></p>
+
+    <section class="history">
+      <h2>Recent Readings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>pH</th>
+            <th>TDS</th>
+            <th>Turbidity</th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <tr><td colspan="4">Loading...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
