@@ -9,7 +9,10 @@
 <body>
   <header class="top">
     <h1>Lakes</h1>
-    <button id="test-btn" class="btn ghost">Test mode</button>
+    <div class="top-actions">
+      <button id="bridge-btn" class="btn ghost sm" title="Live readings via serial bridge">Bridge test</button>
+      <button id="test-btn" class="btn ghost sm">Test mode</button>
+    </div>
   </header>
 
   <main class="container">
@@ -20,8 +23,8 @@
       <h2>Active buoy</h2>
       <article class="card buoy">
         <div class="buoy-head">
-          <h3 id="lake-name">Lake</h3>
-          <span id="lake-loc" class="muted"></span>
+          <h3 id="lake-name">Lake 2</h3>
+          <span id="lake-loc" class="muted">Location: --</span>
         </div>
         <div class="ring-wrap">
           <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -58,8 +61,32 @@
       </div>
     </section>
 
-    <!-- Test mode -->
+    <!-- Serial Bridge test mode -->
+    <section id="bridge" class="view" hidden>
+      <button class="btn ghost back" data-back>Back</button>
+      <div class="row">
+        <h2>Serial bridge test</h2>
+        <span id="status" class="pill">Connecting...</span>
+      </div>
+      <p class="muted">Streams new readings from <code>sensor_readings</code> via your running <code>serial_bridge.py</code> script. <span class="muted">Last updated: <span id="last-updated">--</span></span></p>
+
+      <div class="cards">
+        <div class="card"><span class="label">pH</span><strong id="ph-value" class="value">--</strong></div>
+        <div class="card"><span class="label">TDS (ppm)</span><strong id="tds-value" class="value">--</strong></div>
+        <div class="card"><span class="label">Turbidity (NTU)</span><strong id="turb-value" class="value">--</strong></div>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Time</th><th>pH</th><th>TDS (ppm)</th><th>Turbidity (NTU)</th></tr></thead>
+          <tbody id="bridge-history-body"><tr><td colspan="4">Waiting for new readings...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Direct USB Test mode -->
     <section id="test" class="view" hidden>
+      <button class="btn ghost back" data-back>Back</button>
       <div class="row">
         <h2>Test mode</h2>
         <span id="test-status" class="pill">Not connected</span>
