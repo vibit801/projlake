@@ -3,51 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Water Quality Telemetry</title>
+  <title>Lake monitor</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>Water Quality Monitor</h1>
-      <span id="status" class="status">Connecting...</span>
-    </header>
+  <header class="top">
+    <h1>Lakes</h1>
+    <button id="test-btn" class="btn ghost">Test mode</button>
+  </header>
 
-    <section class="cards">
-      <div class="card">
-        <span class="label">pH Level</span>
-        <strong id="ph-value" class="value">--</strong>
+  <main class="container">
+    <!-- Home -->
+    <section id="home" class="view">
+      <div id="esp-notice" class="notice" hidden>No ESP connected. Connect to the ESP wifi to pull its readings.</div>
+
+      <h2>Active buoy</h2>
+      <article class="card buoy">
+        <div class="buoy-head">
+          <h3 id="lake-name">Lake</h3>
+          <span id="lake-loc" class="muted"></span>
+        </div>
+        <div class="ring-wrap">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="track" cx="50" cy="50" r="44"></circle>
+            <circle id="ring-arc" class="arc" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <div class="ring-text"><strong id="wake-left">--</strong><span class="muted">until next wake</span></div>
+        </div>
+        <div class="actions">
+          <button id="schedule-btn" class="btn">Schedule connection</button>
+          <button id="history-btn" class="btn ghost">See previous data</button>
+        </div>
+      </article>
+
+      <h2>Other lakes</h2>
+      <div id="lake-list" class="list"></div>
+      <button id="add-lake" class="btn ghost">+ Add lake</button>
+    </section>
+
+    <!-- Previous data -->
+    <section id="data" class="view" hidden>
+      <button class="btn ghost back" data-back>Back</button>
+      <h2>Previous data</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Time</th><th>pH</th><th>TDS (ppm)</th><th>Turbidity (NTU)</th></tr></thead>
+          <tbody id="history-body"><tr><td colspan="4">Loading...</td></tr></tbody>
+        </table>
       </div>
-      <div class="card">
-        <span class="label">TDS</span>
-        <strong id="tds-value" class="value">--</strong>
-      </div>
-      <div class="card">
-        <span class="label">Turbidity</span>
-        <strong id="turb-value" class="value">--</strong>
+      <label class="check"><input type="checkbox" id="analysis-toggle" /> Analysis module</label>
+      <div id="analysis" hidden>
+        <div id="analysis-body"></div>
+        <button id="print-btn" class="btn">Print report</button>
       </div>
     </section>
 
-    <p class="meta">Last updated: <span id="last-updated">--</span></p>
-
-    <section class="history">
-      <h2>Recent Readings</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>pH</th>
-            <th>TDS</th>
-            <th>Turbidity</th>
-          </tr>
-        </thead>
-        <tbody id="history-body">
-          <tr><td colspan="4">Loading...</td></tr>
-        </tbody>
-      </table>
+    <!-- Test mode -->
+    <section id="test" class="view" hidden>
+      <div class="row">
+        <h2>Test mode</h2>
+        <span id="test-status" class="pill">Not connected</span>
+      </div>
+      <p class="muted">Reads straight from the board's USB port in this browser. Readings are not saved. Stop the serial bridge first so the port is free.</p>
+      <div class="actions"><button id="usb-btn" class="btn">Connect USB</button></div>
+      <div class="cards">
+        <div class="card"><span class="label">pH</span><strong id="t-ph" class="value">--</strong></div>
+        <div class="card"><span class="label">TDS (ppm)</span><strong id="t-tds" class="value">--</strong></div>
+        <div class="card"><span class="label">Turbidity (NTU)</span><strong id="t-turb" class="value">--</strong></div>
+        <div class="card"><span class="label">Temp (°C)</span><strong id="t-temp" class="value">--</strong></div>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Time</th><th>pH</th><th>TDS</th><th>Turbidity</th></tr></thead>
+          <tbody id="test-body"><tr><td colspan="4">Waiting for readings...</td></tr></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
+  <div id="toast" class="toast" role="status" hidden></div>
   <script type="module" src="app.js"></script>
 </body>
 </html>
