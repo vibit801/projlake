@@ -11,7 +11,6 @@
     <h1>Lakes</h1>
     <div class="top-actions">
       <button id="bridge-btn" class="btn ghost sm" title="Live readings via serial bridge">Bridge test</button>
-      <button id="test-btn" class="btn ghost sm">Test mode</button>
     </div>
   </header>
 
@@ -80,29 +79,6 @@
         <table>
           <thead><tr><th>Time</th><th>pH</th><th>TDS (ppm)</th><th>Turbidity (NTU)</th></tr></thead>
           <tbody id="bridge-history-body"><tr><td colspan="4">Waiting for new readings...</td></tr></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Direct USB Test mode -->
-    <section id="test" class="view" hidden>
-      <button class="btn ghost back" data-back>Back</button>
-      <div class="row">
-        <h2>Test mode</h2>
-        <span id="test-status" class="pill">Not connected</span>
-      </div>
-      <p class="muted">Reads straight from the board's USB port in this browser. Readings are not saved. Stop the serial bridge first so the port is free.</p>
-      <div class="actions"><button id="usb-btn" class="btn">Connect USB</button></div>
-      <div class="cards">
-        <div class="card"><span class="label">pH</span><strong id="t-ph" class="value">--</strong></div>
-        <div class="card"><span class="label">TDS (ppm)</span><strong id="t-tds" class="value">--</strong></div>
-        <div class="card"><span class="label">Turbidity (NTU)</span><strong id="t-turb" class="value">--</strong></div>
-        <div class="card"><span class="label">Temp (°C)</span><strong id="t-temp" class="value">--</strong></div>
-      </div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Time</th><th>pH</th><th>TDS</th><th>Turbidity</th></tr></thead>
-          <tbody id="test-body"><tr><td colspan="4">Waiting for readings...</td></tr></tbody>
         </table>
       </div>
     </section>
